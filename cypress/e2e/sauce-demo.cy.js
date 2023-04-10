@@ -17,16 +17,22 @@ describe('Checkout items', () => {
     })
   })
 
-  it('should successfully checkout one item', function () {
+  it('should successfully checkout multiple items', function () {
     // Select item 'Sauce Labs Backpack'
-    cy.get('[data-test=add-to-cart-sauce-labs-backpack').click()
-    cy.get('[data-test=remove-sauce-labs-backpack').should('have.text', 'Remove')
+    cy.get('[data-test=add-to-cart-sauce-labs-backpack]').click()
+    cy.get('[data-test=remove-sauce-labs-backpack]').should('have.text', 'Remove')
+    // Select item 'Sauce Labs Bolt T-Shirt'
+    cy.get('[data-test=add-to-cart-sauce-labs-bolt-t-shirt]').click()
+    cy.get('[data-test=remove-sauce-labs-bolt-t-shirt]').should('have.text', 'Remove')
+    // Select item 'Sauce Labs Onesie'
+    cy.get('[data-test=add-to-cart-sauce-labs-onesie]').click()
+    cy.get('[data-test=remove-sauce-labs-onesie]').should('have.text', 'Remove')
 
     // Click shopping cart link on the top right of the page
     cy.get('.shopping_cart_link').click()
     cy.url().should('include', '/cart.html')
     cy.get('.title').should('have.text', 'Your Cart')
-    cy.get('.cart_item').should('have.length', 1)
+    cy.get('.cart_item').should('have.length', 3)
 
     // Click Checkout button
     cy.get('[data-test=checkout]').click()
@@ -39,15 +45,31 @@ describe('Checkout items', () => {
     cy.get('[data-test=postalCode]').type(this.data.Postal)
 
      // Click Continue button
-     cy.get('[data-test=continue]').click()
-     cy.get('.title').should('have.text', 'Checkout: Overview')
-     cy.url().should('include', '/checkout-step-two.html')
-     cy.get('.cart_item').should('have.length', 1)
+    cy.get('[data-test=continue]').click()
+    cy.get('.title').should('have.text', 'Checkout: Overview')
+    cy.url().should('include', '/checkout-step-two.html')
+    cy.get('.cart_item').should('have.length', 3)
 
-      // Click Finish button
-      cy.get('[data-test=finish]').click()
-      cy.url().should('include', '/checkout-complete.html')
-      cy.get('.title').should('have.text', 'Checkout: Complete!')
-      cy.get('.complete-header').should('have.text', 'Thank you for your order!')
+    // Click Finish button
+    cy.get('[data-test=finish]').click()
+    cy.url().should('include', '/checkout-complete.html')
+    cy.get('.title').should('have.text', 'Checkout: Complete!')
+    cy.get('.complete-header').should('have.text', 'Thank you for your order!')
+  })
+
+  it('should display an error message in a no items checkout', function () {
+    // Click shopping cart link on the top right of the page
+    cy.get('.shopping_cart_link').click()
+    cy.url().should('include', '/cart.html')
+    cy.get('.title').should('have.text', 'Your Cart')
+
+    // Click Checkout button
+    cy.get('[data-test=checkout]').click()
+    cy.url().should('include', '/checkout-step-one.html')
+    cy.get('.title').should('have.text', 'Checkout: Your Information')
+
+     // Click Continue button
+    cy.get('[data-test=continue]').click()
+    cy.get('[data-test=error]').should('have.text', 'Error: First Name is required')
   })
 })
