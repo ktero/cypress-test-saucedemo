@@ -1,8 +1,4 @@
 {
-  "Username": "standard_user",
-  "Password": "secret_sauce",
-  "InvalidUsername": "invalid_user",
-  "InvalidPassword": "invalid_password",
   "Firstname": "John",
   "Lastname": "Doe",
   "Postal": "123"

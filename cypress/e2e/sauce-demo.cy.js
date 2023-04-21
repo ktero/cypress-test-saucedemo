@@ -1,29 +1,49 @@
-describe('Checkout items', () => {
+describe('Saucedemo App', () => {
 
   beforeEach(function () {
-    // Prepare fixture data
-    cy.fixture('checkout').then((data) => {
+     // Load fixture data to be used for loggin in the application
+    cy.fixture('auth').then((data) => {
       this.data = data
-      cy.log("THIS: ", this.data)
+      cy.log("Auth fixture data: ", this.data)
 
       // Navigate to https://www.saucedemo.com/
       cy.visit('https://www.saucedemo.com/')
+
       // Login
-      cy.get('[data-test=username]').type(this.data.Username)
-      cy.get('[data-test=password]').type(this.data.Password)
+      cy.get('[data-test=username]').type(this.data.Valid.Username)
+      cy.get('[data-test=password]').type(this.data.Valid.Password)
       cy.get('[data-test=login-button]').click()
       cy.url().should('include', '/inventory.html')
       cy.get('.title').should('have.text', 'Products')
     })
+
+    // Load fixture data to be used in Checkout test
+    cy.fixture('checkout').then((data) => {
+      this.data = data
+      cy.log("Checkout fixture data: ", this.data)
+    })
+  })
+
+  it('should be able to login and logout', () => {
+    // Open hamburger menu
+    cy.get('#react-burger-menu-btn').click()
+
+    // Logout
+    cy.get('#logout_sidebar_link').click()
+
+    // Check that the user is redirected to the login page
+    cy.url().should('equal', 'https://www.saucedemo.com/')
   })
 
   it('should successfully checkout multiple items', function () {
     // Select item 'Sauce Labs Backpack'
     cy.get('[data-test=add-to-cart-sauce-labs-backpack]').click()
     cy.get('[data-test=remove-sauce-labs-backpack]').should('have.text', 'Remove')
+
     // Select item 'Sauce Labs Bolt T-Shirt'
     cy.get('[data-test=add-to-cart-sauce-labs-bolt-t-shirt]').click()
     cy.get('[data-test=remove-sauce-labs-bolt-t-shirt]').should('have.text', 'Remove')
+    
     // Select item 'Sauce Labs Onesie'
     cy.get('[data-test=add-to-cart-sauce-labs-onesie]').click()
     cy.get('[data-test=remove-sauce-labs-onesie]').should('have.text', 'Remove')
@@ -57,7 +77,7 @@ describe('Checkout items', () => {
     cy.get('.complete-header').should('have.text', 'Thank you for your order!')
   })
 
-  it('should display an error message in a no items checkout', function () {
+  it('should display an error message in checkout if there are no items', function () {
     // Click shopping cart link on the top right of the page
     cy.get('.shopping_cart_link').click()
     cy.url().should('include', '/cart.html')
