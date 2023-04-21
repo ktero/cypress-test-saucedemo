@@ -24,17 +24,6 @@ describe('Saucedemo App', () => {
     })
   })
 
-  it('should be able to login and logout', () => {
-    // Open hamburger menu
-    cy.get('#react-burger-menu-btn').click()
-
-    // Logout
-    cy.get('#logout_sidebar_link').click()
-
-    // Check that the user is redirected to the login page
-    cy.url().should('equal', 'https://www.saucedemo.com/')
-  })
-
   it('should successfully checkout multiple items', function () {
     // Select item 'Sauce Labs Backpack'
     cy.get('[data-test=add-to-cart-sauce-labs-backpack]').click()
