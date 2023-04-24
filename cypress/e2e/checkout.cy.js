@@ -1,4 +1,4 @@
-describe('Saucedemo App', () => {
+describe('Test checkout functionality', () => {
 
   beforeEach(function () {
      // Load fixture data to be used for loggin in the application

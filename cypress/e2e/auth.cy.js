@@ -1,4 +1,4 @@
-describe('Authentication Tests', () => {
+describe('Test authentication functionality', () => {
   
   beforeEach(function () {
     // Prepare fixture data
