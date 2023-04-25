@@ -4,7 +4,6 @@ describe('Test checkout functionality', () => {
      // Load fixture data to be used for loggin in the application
     cy.fixture('auth').then((data) => {
       this.data = data
-      cy.log("Auth fixture data: ", this.data)
 
       // Navigate to https://www.saucedemo.com/
       cy.visit('https://www.saucedemo.com/')
@@ -20,7 +19,6 @@ describe('Test checkout functionality', () => {
     // Load fixture data to be used in Checkout test
     cy.fixture('checkout').then((data) => {
       this.data = data
-      cy.log("Checkout fixture data: ", this.data)
     })
   })
 
