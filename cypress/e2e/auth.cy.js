@@ -6,8 +6,8 @@ describe('Test authentication functionality', () => {
       this.data = data  
     })
 
-    // Navigate to https://www.saucedemo.com/
-    cy.visit('https://www.saucedemo.com/')
+    // Navigate to the value in baseUrl
+    cy.visit('/')
   })
   
   it('should successfully login', function () {

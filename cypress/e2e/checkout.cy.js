@@ -5,8 +5,8 @@ describe('Test checkout functionality', () => {
     cy.fixture('auth').then((data) => {
       this.data = data
 
-      // Navigate to https://www.saucedemo.com/
-      cy.visit('https://www.saucedemo.com/')
+      // Navigate to the value in baseUrl
+      cy.visit('/')
 
       // Login
       cy.get('[data-test=username]').type(this.data.Valid.Username)
