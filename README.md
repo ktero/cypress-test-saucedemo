@@ -13,3 +13,6 @@ Test Set: Authentication
 - Test 2: should display an error message due to invalid credentials
 - Test 3: should display an error message due to no credentials entered
 - Test 4: should be able to successfully login and logout
+
+Test Set: Product Inventory
+- Test 1: should sort products by price and name
