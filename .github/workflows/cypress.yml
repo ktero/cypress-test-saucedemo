@@ -7,24 +7,23 @@ on:
     branches: [main]
 
 jobs:
-  test:
-    timeout-minutes: 60
+  cypress-run:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm ci
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Run Cypress tests
-        run: npm run cy:test
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          build: npm run build
+          start: npm run cy:test
 
       - uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: cypress-report
-          path: cypress-report/
+          name: cypress-test-saucedemo
+          path: cypress-test-saucedemo/
           retention-days: 30
