@@ -18,8 +18,6 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
-          build: npm run build
-          start: npm run cy:test
 
       - uses: actions/upload-artifact@v3
         if: always()
