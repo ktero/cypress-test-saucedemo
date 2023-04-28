@@ -69,6 +69,7 @@ describe('Test checkout functionality', () => {
     cy.get('.shopping_cart_link').click()
     cy.url().should('include', '/cart.html')
     cy.get('.title').should('have.text', 'Your Cart')
+    cy.get('.cart_item').should('have.length', 0)
 
     // Click Checkout button
     cy.get('[data-test=checkout]').click()
@@ -78,5 +79,44 @@ describe('Test checkout functionality', () => {
      // Click Continue button
     cy.get('[data-test=continue]').click()
     cy.get('[data-test=error]').should('have.text', 'Error: First Name is required')
+  })
+
+  it('should successfully checkout the item after adding it to cart through product item page', function () {
+    // Go to 'Sauce Labs Backpack' item page
+    cy.contains('Sauce Labs Backpack').click()
+    cy.get('[data-test=add-to-cart-sauce-labs-backpack]').click()
+    cy.get('[data-test=remove-sauce-labs-backpack]').should('have.text', 'Remove')
+
+    // Go to 'Back to Products' page
+    cy.get('[data-test=back-to-products]').click()
+    cy.get('[data-test=remove-sauce-labs-backpack]').should('have.text', 'Remove')
+
+    // Click shopping cart link on the top right of the page
+    cy.get('.shopping_cart_link').click()
+    cy.url().should('include', '/cart.html')
+    cy.get('.title').should('have.text', 'Your Cart')
+    cy.get('.cart_item').should('have.length', 1)
+
+    // Click Checkout button
+    cy.get('[data-test=checkout]').click()
+    cy.url().should('include', '/checkout-step-one.html')
+    cy.get('.title').should('have.text', 'Checkout: Your Information')
+
+    // Enter checkout information
+    cy.get('[data-test=firstName]').type(this.data.Firstname)
+    cy.get('[data-test=lastName]').type(this.data.Lastname)
+    cy.get('[data-test=postalCode]').type(this.data.Postal)
+
+    // Click Continue button
+    cy.get('[data-test=continue]').click()
+    cy.get('.title').should('have.text', 'Checkout: Overview')
+    cy.url().should('include', '/checkout-step-two.html')
+    cy.get('.cart_item').should('have.length', 1)
+
+    // Click Finish button
+    cy.get('[data-test=finish]').click()
+    cy.url().should('include', '/checkout-complete.html')
+    cy.get('.title').should('have.text', 'Checkout: Complete!')
+    cy.get('.complete-header').should('have.text', 'Thank you for your order!')
   })
 })
