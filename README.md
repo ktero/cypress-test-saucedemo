@@ -6,14 +6,21 @@ I do not own the following websites used for testing. I am only using the websit
 
 ### SauceDemo Tests
 Test Set: User checkout
-- Test 1: should successfully checkout multiple items
-- Test 2: should display an error message in checkout if there are no items
+| Test #      | Test description                                                                        |
+| :---        | :---                                                                                    |
+| 1           | should successfully checkout multiple items                                             |
+| 2           | should display an error message in checkout if there are no items                       |
+| 3           | should successfully checkout the item after adding it to cart through product item page |
 
 Test Set: Authentication
-- Test 1: should successfully login
-- Test 2: should display an error message due to invalid credentials
-- Test 3: should display an error message due to no credentials entered
-- Test 4: should be able to successfully login and logout
+| Test #      | Test description                                                         |
+| :---        | :---                                                                     |
+| 1           | should successfully login                                                |
+| 2           | should display an error message due to invalid credentials               |
+| 3           | should display an error message due to no credentials entered            |
+| 4           | should be able to successfully login and logout                          |
 
 Test Set: Product Inventory
-- Test 1: should sort products by price and name
+| Test #      | Test description                                                         |
+| :---        | :---                                                                     |
+| 1           | should sort products by price and name                                   |
