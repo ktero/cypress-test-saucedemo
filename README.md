@@ -9,7 +9,7 @@ Test Set: User checkout
 | Test #      | Test description                                                                        |
 | :---        | :---                                                                                    |
 | 1           | should successfully checkout multiple items                                             |
-| 2           | should display an error message in checkout if there are no items                       |
+| 2           | should display an error message in checkout if there are no information given           |
 | 3           | should successfully checkout the item after adding it to cart through product item page |
 
 Test Set: Authentication

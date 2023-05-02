@@ -64,12 +64,16 @@ describe('Test checkout functionality', () => {
     cy.get('.complete-header').should('have.text', 'Thank you for your order!')
   })
 
-  it('should display an error message in checkout if there are no items', function () {
+  it('should display an error message in checkout if there are no information given', function () {
+    // Select item 'Sauce Labs Backpack'
+    cy.get('[data-test=add-to-cart-sauce-labs-backpack]').click()
+    cy.get('[data-test=remove-sauce-labs-backpack]').should('have.text', 'Remove')
+
     // Click shopping cart link on the top right of the page
     cy.get('.shopping_cart_link').click()
     cy.url().should('include', '/cart.html')
     cy.get('.title').should('have.text', 'Your Cart')
-    cy.get('.cart_item').should('have.length', 0)
+    cy.get('.cart_item').should('have.length', 1)
 
     // Click Checkout button
     cy.get('[data-test=checkout]').click()
