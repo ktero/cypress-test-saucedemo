@@ -49,4 +49,12 @@ describe('Test authentication functionality', () => {
     // Check that the user is redirected to the login page
     cy.url().should('equal', 'https://www.saucedemo.com/')
   })
+
+  it('should not login locked out user', function () {
+    cy.get('[data-test=username]').type(this.data.LockedUser.Username)
+    cy.get('[data-test=password]').type(this.data.LockedUser.Password)
+    cy.get('[data-test=login-button]').click()
+    cy.get('[data-test=error]').should('be.visible')
+    cy.get('[data-test=error]').should('have.text', 'Epic sadface: Sorry, this user has been locked out.')
+  })
 })

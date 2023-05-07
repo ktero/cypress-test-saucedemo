@@ -19,6 +19,7 @@ Test Set: Authentication
 | 2           | should display an error message due to invalid credentials               |
 | 3           | should display an error message due to no credentials entered            |
 | 4           | should be able to successfully login and logout                          |
+| 5           | should not login locked out user                                         |
 
 Test Set: Product Inventory
 | Test #      | Test description                                                         |
